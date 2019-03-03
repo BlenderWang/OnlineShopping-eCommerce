@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Raleway');
+
+:root {
+  --beige: #F2DA91;
+  --green: #6F8C7A;
+  --brown: #A85C3A;
+  --black: #242625;
+  --accent-clr: #8E1F25;
+}
+
+body {
+  font-family: 'Raleway', Arial, Helvetica, sans-serif;
+  color: var(--black);
+}
+
+nav {
+  box-shadow: 0 2px 1px 1px rgba(0,0,0,.2);
+}
+
+.navbar-light {
+  background: var(--beige) !important;
+}
+
+.logo {
+  width: 3.4rem;
+}
+
+.btn-outline-success {
+  color: var(--green);
+  background: var(--beige);
+  border-color: var(--green);
+}
+
+.btn-outline-success:hover {
+  color: var(--beige);
+  background: var(--green);
+  border-color: var(--beige);
+}
+
+.fa-shopping-cart {
+  color: var(--green);
+  font-size: 1.2em;
+  width: 2rem;
+}
+
+.btn-danger {
+  background: var(--brown);
+  border-color: var(--brown);
+}
+
+/* container style */
+.jumbotron {
+  background-color: transparent;
+}
+.title {
+  margin-top: 1em;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+}
+
+span.text-success {
+  color: var(--green) !important;
+
+}
+
+  /* aside styling */
+.menu {
+  position: relative;
+  width: 220px;
+  margin: 0 0 0 2rem;
+  list-style-type: none;
+  padding: 0;
+}
+.menu a {
+  display: block;
+  text-decoration: none;
+  background: var(--green);
+  border-radius: 4px;
+  padding: 1em 1.5em;
+  color: whitesmoke;
+}
+.menu a:hover {
+  background: whitesmoke;
+  color: var(--green);
+}
+.menu .active {
+  background: var(--brown);
+}
+.sub-menu {
+  padding: .7em;
+}
+.sub-menu .list-item {
+  border-left: .5em solid var(--green);
+  margin: .3em 0;
+}
+.sub-menu a {
+  background: white;
+  color: var(--green);
+}
+
+.sub-menu a:hover {
+  background: whitesmoke;
+}
+
+/* container row */
+.row {
+  margin-bottom: 2rem;
+  margin-left: 3rem;
+}
+
+.row-1 {
+  margin-top: -37rem;
+}
+
+img.card-img-top {
+  max-height: 250px;
+  object-fit: cover;
+}
+
+.btn-success {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.viewers {
+  margin-right: 7rem;
+}
+
+/* footer */
+.social {
+  font-size: 3rem;
+}
+
+.social i {
+  color: var(--black);
+  margin: 0 .45rem;
+}
+
+.endnote {
+  border-top: 2px solid rgba(0,0,0,.2);
+  font-size: .85rem;
+}
