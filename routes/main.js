@@ -4,8 +4,8 @@ router.get('/', (req, res) => {
     res.render('main/home');
 });
 
-router.get('/signup', (req, res) => {
-    res.render('main/signup');
+router.get('/login', (req, res) => {
+    res.render('main/login');
 });
 
 module.exports = router;
