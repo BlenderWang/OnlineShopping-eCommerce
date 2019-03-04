@@ -1,11 +1,11 @@
 <% layout('layout') -%>
 
-<% if(errors.length > 0) { %>
+<% if(message.length > 0) { %>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <%= errors %>
+        <%= message %>
     </div>
 <% } %>
 
@@ -15,10 +15,6 @@
     </div>
 
     <div class="form-group">
-        <label for="inputName" class="sr-only"></label>
-        <input type="text" id="inputName" class="form-control" name="name" placeholder="Ange ditt namn" required autofocus>
-    </div>
-    <div class="form-group">
         <label for="inputEmail" class="sr-only"></label>
         <input type="email" id="inputEmail" class="form-control" name="email" placeholder="E-postadress" required>
     </div>
@@ -26,7 +22,7 @@
         <label for="inputPassword" class="sr-only"></label>
         <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Lösenord" required>
     </div>
-    <button class="btn btn-lg btn-success" type="submit">Skapa konto</button>
+    <button class="btn btn-lg btn-success" type="submit">Logga In</button>
 
     <p class="mb-1 text-muted" style="margin-top: 8rem;"><em>&copy; 2019 Begnatsomnytt AB</em></p>
 
