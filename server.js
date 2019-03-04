@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const engine = require('ejs-mate');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const flash = require('express-flash');
 
 const User = require('./models/user')
 
@@ -31,6 +34,14 @@ app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(session({
+    resave: true,
+    saveUninitialized: true,
+    secret: "Wangi@!#@"
+}));
+app.use(flash());
+
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 

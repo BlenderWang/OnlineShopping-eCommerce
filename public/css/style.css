@@ -139,3 +139,28 @@ img.card-img-top {
   border-top: 2px solid rgba(0,0,0,.2);
   font-size: .85rem;
 }
+
+/* sign up page */
+.form-signin {
+    width: 100% !important;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar {
+    background: var(--green);
+    border-radius: 50%;
+    border: 1px solid var(--black);
+    width: 80px;
+    height: 80px;
+}
+
+.fa-user-tag {
+    color: whitesmoke;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.form-group {
+    width: 40%;
+}
