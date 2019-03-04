@@ -8,6 +8,8 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const flash = require('express-flash');
 
+const secret = require('./config/secret');
+
 const User = require('./models/user')
 
 const app = express();
@@ -21,7 +23,7 @@ const app = express();
 });*/
 
 mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true}, (err) => {
+mongoose.connect(secret.database, { useNewUrlParser: true}, (err) => {
     if(err) {
         console.log(err);
     }else {
@@ -38,7 +40,7 @@ app.use(cookieParser());
 app.use(session({
     resave: true,
     saveUninitialized: true,
-    secret: "Wangi@!#@"
+    secret: secret.secretKey
 }));
 app.use(flash());
 
@@ -51,7 +53,7 @@ const userRoutes = require('./routes/user');
 app.use(mainRoutes);
 app.use(userRoutes);
 
-app.listen(3000, (err) => {
+app.listen(secret.port, (err) => {
     if(err) throw err;
-    console.log('Server is running at port 3000');
+    console.log('Server is running at port ' + secret.port);
 });
