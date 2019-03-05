@@ -1,10 +1,121 @@
 <% layout('layout') -%>
 
-<section class="jumbotron">
-    <h1 class="title text-center">Välkommen till <span class="text-uppercase text-success">Begnatsomnytt</span>!
-    </h1>
-    <p class="text-center">Kort beskrivning om <span class="text-uppercase text-success">företaget</span> Lorem
-        ipsum
-        dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua.</p>
-</section>
+<main role='main'>
+    <section class="jumbotron">
+        <h1 class="title text-center">Välkommen till <span class="text-uppercase text-success">Begnatsomnytt</span>!
+        </h1>
+        <p class="text-center">Kort beskrivning om <span class="text-uppercase text-success">företaget</span> Lorem
+            ipsum
+            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua.</p>
+    </section>
+
+    <aside>
+        <ul class='menu'>
+            <li><a href="#" class="list-item active">Populära Varor</a></li>
+            <li>
+                <a href="#" class="list-item">Dam</a>
+                <ul class='menu sub-menu'>
+                    <li><a href="#" class="list-item">Klänningar</a></li>
+                    <li><a href="#" class="list-item">Vintage</a></li>
+                    <li><a href="#" class="list-item">Övrig</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="list-item">Herr</a>
+                <ul class='menu sub-menu'>
+                    <li><a href="#" class="list-item">Skjortor</a></li>
+                    <li><a href="#" class="list-item">Vintage</a></li>
+                    <li><a href="#" class="list-item">Övrig</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="container">
+        <div class="row row-1">
+            <div class="col-md-3 offset-md-3">
+                <div class="card mb-4 shadow-sm">
+                    <img src="images/black_dress.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Rubrik #1</h5>
+                        <p class="card-text">Pris: 349 kr</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="btn btn-success">Köp</a>
+                            <small class='text-muted'><i class="fas fa-eye"></i><em>32</em></small>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col-md-3 -->
+            <div class="col-md-3">
+                <div class="card mb-4 shadow-sm">
+                    <img src="images/dress.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Rubrik #2</h5>
+                        <p class="card-text">Pris: 319 kr</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="btn btn-success">Köp</a>
+                            <small class='text-muted'><i class="fas fa-eye"></i><em>52</em></small>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col-md-3 -->
+            <div class="col-md-3">
+                <div class="card mb-4 shadow-sm">
+                    <img src="images/black_dress2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Rubrik #3</h5>
+                        <p class="card-text">Pris: 399 kr</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="btn btn-success">Köp</a>
+                            <small class='text-muted'><i class="fas fa-eye"></i><em>68</em></small>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col-md-3 -->
+        </div> <!-- end row -->
+        <div class="row">
+            <div class="col-md-3 offset-md-3">
+                <div class="card mb-4 shadow-sm">
+                    <img src="images/dress.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Rubrik #4</h5>
+                        <p class="card-text">Pris: 349 kr</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="btn btn-success">Visa</a>
+                            <small class='text-muted'><i class="fas fa-eye"></i><em>32</em></small>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col-md-3 -->
+            <div class="col-md-3">
+                <div class="card mb-4 shadow-sm">
+                    <img src="images/black_dress2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Rubrik #5</h5>
+                        <p class="card-text">Pris: 319 kr</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="btn btn-success">Visa</a>
+                            <small class='text-muted'><i class="fas fa-eye"></i><em>52</em></small>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col-md-3 -->
+            <div class="col-md-3">
+                <div class="card mb-4 shadow-sm">
+                    <img src="images/black_dress.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Rubrik #6</h5>
+                        <p class="card-text">Pris: 399 kr</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="btn btn-success">Köp</a>
+                            <small class='text-muted'><i class="fas fa-eye"></i><em>68</em></small>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col-md-3 -->
+        </div> <!-- end row -->
+    </div>
+
+    <div class="d-flex justify-content-end py-5 viewers"><em>1245 besökare</em></div>
+</main>
