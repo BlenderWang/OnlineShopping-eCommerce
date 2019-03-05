@@ -7,7 +7,14 @@
             <div class="media-body">
                 <h5 class="mt-0">Namn: <%= user.profile.name %></h5>
                 <p>E-post: <%= user.email %></p>
+
+                <% if(user.address === '' || typeof user.address === 'undefined') { %>
+                <p>Adress: <span class="text-danger font-weight-bold">Ingen address</span></p>
+                <% }else { %>
                 <p>Adress: <%= user.address %></p>
+                <% } %>
+
+                <a href="/edit-profile" class="btn btn-lg btn-success">Redigera</a>
             </div>
         </div>
     </div>
