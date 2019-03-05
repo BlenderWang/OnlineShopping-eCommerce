@@ -12,6 +12,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
+    "connect-mongo": "^2.0.3",
     "cookie-parser": "^1.4.4",
     "ejs": "^2.6.1",
     "ejs-mate": "^3.0.0",
@@ -19,6 +20,8 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
     "mongoose": "^5.4.16",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }
