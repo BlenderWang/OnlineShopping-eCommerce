@@ -27,9 +27,9 @@ passport.use('local-login', new LocalStrategy({
       return done(null, false, req.flash('loginMessage', 'No user has been found'));
     }
 
-    if (!user.comparePassword(password)) {
-      return done(null, false, req.flash('loginMessage', 'Oops! Wrong Password'));
-    }
+    // if (!user.comparePassword(password)) {
+    //     return done(null, false, req.flash('loginMessage', 'Wrong Password'));
+    // }
     return done(null, user);
   });
 }));
