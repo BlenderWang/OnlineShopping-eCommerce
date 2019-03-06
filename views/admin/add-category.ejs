@@ -1,0 +1,24 @@
+<% layout('layout') -%>
+
+<% if(message.length > 0) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <%= message %>
+    </div>
+<% } %>
+
+<form method='post' class="form-signin my-5 d-flex">
+    <h1>Add a new category</h1>
+
+    <div class="form-group">
+        <label for="inputName" class="sr-only">Name</label>
+        <input type="text" id="inputName" class="form-control" name="name" placeholder="Category" required autofocus>
+    </div>
+
+    <button class="btn btn-lg btn-success" type="submit">Submit</button>
+
+    <p class="mb-1 text-muted" style="margin-top: 8rem;"><em>&copy; 2019 Begnatsomnytt AB</em></p>
+
+</form>

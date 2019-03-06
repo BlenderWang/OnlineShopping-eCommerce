@@ -11,8 +11,8 @@ const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
 
 const secret = require('./config/secret');
-
-const User = require('./models/user')
+const User = require('./models/user');
+const Category = require('./models/category');
 
 const app = express();
 
@@ -53,14 +53,24 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    Category.find({}, (err, categories) => {
+        if(err) return next(err);
+        res.locals,categories = categories;
+        next();
+    });
+});
+
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 const mainRoutes = require('./routes/main');
 const userRoutes = require('./routes/user');
+const adminRoutes = require('./routes/admin');
 
 app.use(mainRoutes);
 app.use(userRoutes);
+app.use(adminRoutes);
 
 app.listen(secret.port, (err) => {
     if(err) throw err;
