@@ -1,5 +1,33 @@
 <% layout('layout') -%>
 
+<aside>
+    <ul class='menu'>
+        <li><a href="#" class="list-item active">Populära</a>
+            <ul class='menu sub-menu'>
+                <% for(let i = 0; i < categories.length; i++) { %>
+                <li><a href="#" class="list-item"><%= categories[i].name %></a></li>
+                <% } %>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="list-item">Dam</a>
+            <ul class='menu sub-menu'>
+                <li><a href="#" class="list-item">Klänningar</a></li>
+                <li><a href="#" class="list-item">Vintage</a></li>
+                <li><a href="#" class="list-item">Övrig</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="list-item">Herr</a>
+            <ul class='menu sub-menu'>
+                <li><a href="#" class="list-item">Skjortor</a></li>
+                <li><a href="#" class="list-item">Vintage</a></li>
+                <li><a href="#" class="list-item">Övrig</a></li>
+            </ul>
+        </li>
+    </ul>
+</aside>
+
 <main role='main'>
     <section class="jumbotron">
         <h1 class="title text-center">Välkommen till <span class="text-uppercase text-success">Begnatsomnytt</span>!
@@ -10,27 +38,6 @@
             aliqua.</p>
     </section>
 
-    <aside>
-        <ul class='menu'>
-            <li><a href="#" class="list-item active">Populära Varor</a></li>
-            <li>
-                <a href="#" class="list-item">Dam</a>
-                <ul class='menu sub-menu'>
-                    <li><a href="#" class="list-item">Klänningar</a></li>
-                    <li><a href="#" class="list-item">Vintage</a></li>
-                    <li><a href="#" class="list-item">Övrig</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#" class="list-item">Herr</a>
-                <ul class='menu sub-menu'>
-                    <li><a href="#" class="list-item">Skjortor</a></li>
-                    <li><a href="#" class="list-item">Vintage</a></li>
-                    <li><a href="#" class="list-item">Övrig</a></li>
-                </ul>
-            </li>
-        </ul>
-    </aside>
 
     <div class="container">
         <div class="row row-1">

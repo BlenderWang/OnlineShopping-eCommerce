@@ -56,7 +56,7 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
     Category.find({}, (err, categories) => {
         if(err) return next(err);
-        res.locals,categories = categories;
+        res.locals.categories = categories;
         next();
     });
 });

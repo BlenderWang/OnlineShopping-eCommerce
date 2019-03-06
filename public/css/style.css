@@ -63,6 +63,11 @@ span.text-success {
 }
 
   /* aside styling */
+aside {
+  margin-top: 20rem;
+  position: absolute;
+}
+
 .menu {
   position: relative;
   width: 220px;
@@ -107,9 +112,9 @@ span.text-success {
   margin-left: 3rem;
 }
 
-.row-1 {
+/* .row-1 {
   margin-top: -37rem;
-}
+} */
 
 img.card-img-top {
   max-height: 250px;
