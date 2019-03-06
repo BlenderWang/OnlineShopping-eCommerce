@@ -7,9 +7,16 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+
             <li class="nav-item active">
-                <a class="nav-link" href="#">Köp<span class="sr-only">(current)</span></a>
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Köp<span class="sr-only">(current)</span></a>
+                <ul class="dropdown-menu">
+                    <% for(let i = 0; i < categories.length; i++) { %>
+                        <li><a href="/products/<%= categories[i]._id %>"><%= categories[i].name %></a></li>
+                    <% } %>
+                </ul>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="#">Sälj</a>
             </li>
@@ -20,11 +27,6 @@
                 <a class="nav-link" href="#">Kontakt</a>
             </li>
         </ul>
-
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sök</button>
-        </form>
 
         <a href="#"><i class="fas fa-shopping-cart"></i></a>
 
