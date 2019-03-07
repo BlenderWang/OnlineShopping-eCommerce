@@ -1,0 +1,42 @@
+<% layout('layout') -%>
+
+<% if(data.length === 0) { %>
+    <h3 class="text-center mt-3">Search not found</h3>
+<% } else { %>
+    <h3 class="text-center mt-3">Results for <%= query %></h3>
+
+    <aside style="margin-top: 3rem;">
+        <ul class='menu'>
+            <li><a href="#" class="list-item active">Resultat</a>
+                <ul class='menu sub-menu'>
+                    <% for(let i = 0; i < categories.length; i++) { %>
+                    <li><a class="list-item" href="/products/<%= categories[i]._id %>" class="list-item"><%= categories[i].name %></a></li>
+                    <% } %>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="container">
+        <div class="row mt-5">
+            <% for(let i = 0; i < data.length; i++) { %>
+            <div class="col-md-4">
+                <a href="/product/<%= data[i]._source._id %>">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="<%= data[i]._source.image %>" class="card-img-top" alt="thumbnail img">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= data[i]._source.name %></h5>
+                            <p class="card-text"><%= data[i]._source.category.name %></p>
+                            <p class="card-text"><%= data[i]._source.price %> <em>kr</em></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="btn btn-success">Köp</a>
+                                <small class='text-muted'><i class="fas fa-eye"></i><em>32</em></small>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div> <!-- end col-md-3 -->
+            <% } %>
+        </div> <!-- end row -->
+    </div>
+<% } %>
