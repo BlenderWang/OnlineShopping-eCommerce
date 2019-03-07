@@ -169,3 +169,15 @@ img.card-img-top {
 .form-group {
     width: 40%;
 }
+
+/* single product page */
+.divi {
+  width: 100%;
+  height: 3px;
+  background: rgba(0,0,0,.2);
+}
+
+.fa-credit-card {
+  font-size: 1.8rem;
+  color: var(--black);
+}
