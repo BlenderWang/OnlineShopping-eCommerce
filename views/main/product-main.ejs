@@ -1,0 +1,67 @@
+<% layout('layout') %>
+
+<aside>
+    <ul class='menu'>
+        <li><a href="#" class="list-item active">Resultat</a>
+            <ul class='menu sub-menu'>
+                <% for(let i = 0; i < categories.length; i++) { %>
+                <li><a class="list-item" href="/products/<%= categories[i]._id %>" class="list-item"><%= categories[i].name %></a></li>
+                <% } %>
+            </ul>
+        </li>
+    </ul>
+</aside>
+
+<section class="jumbotron">
+    <h1 class="title text-center">Dive on <span class="text-uppercase text-success">in</span>!
+    </h1>
+    <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</section>
+
+<div class="container">
+    <div class="row mt-5">
+        <% for(let i = 0; i < products.length; i++) { %>
+            <div class="col-md-4">
+                <a href="/product/<%= products[i]._id %>">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="<%= products[i].image %>" class="card-img-top" alt="thumbnail img">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= products[i].name %></h5>
+                            <p class="card-text"><%= products[i].category.name %></p>
+                            <p class="card-text"><%= products[i].price %> <em>kr</em></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="btn btn-success">Köp</a>
+                                <small class='text-muted'><i class="fas fa-eye"></i><em>32</em></small>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div> <!-- end col-md-3 -->
+            <% } %>
+
+        <ul class="pagination text-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <li class="page-item">
+                <% for(let i = 1; i <= pages; i++) { %>
+                    <% if(i === 1) { %>
+                        <li><a class="page-link" href="/"><%= i %></a></li>
+                    <% }else { %>
+                        <li><a class="page-link" href="/page/<%= i %>"><%= i %></a></li>
+                    <% } %>
+                <% } %>
+            </li>
+
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+
+    </div> <!-- end row -->
+</div> <!-- end container -->

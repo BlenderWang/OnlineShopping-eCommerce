@@ -2,6 +2,27 @@ const router = require('express').Router();
 const User = require('../models/user');
 const Product = require('../models/product');
 
+function paginate(req, res, next) {
+    const perPage = 9;
+    const page = req.params.page;
+
+    Product
+        .find()
+        .skip(perPage * page)
+        .limit(perPage)
+        .populate('category')
+        .exec((err, products) => {
+            if(err) return next(err);
+            Product.count().exec((err, count) => {
+                if(err) return next(err);
+                res.render('main/product-main', {
+                    products: products,
+                    pages: count / perPage
+                });
+            });
+        });
+}
+
 Product.createMapping(function(err, mapping) {
     if(err) {
         console.log('error occurred creating mapping');
@@ -48,8 +69,16 @@ router.get('/search', (req, res, next) => {
     }
 });
 
-router.get('/', (req, res) => {
-    res.render('main/home');
+router.get('/', (req, res, next) => {
+    if(req.user) {
+        paginate(req, res, next);
+    }else {
+        res.render('main/home');
+    }
+});
+
+router.get('/page/:page', (req, res, next) => {
+    paginate(req, res, next);
 });
 
 router.get('/about', (req, res) => {
