@@ -48,5 +48,29 @@
             </a>
         </div> <!-- end col-md-3 -->
         <% } %>
+
+        <ul class="pagination text-center">
+            <li class="page-item">
+                <a class="page-link" href="" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <li class="page-item">
+                <% for(let i = 1; i <= pages; i++) { %>
+                    <% if(i === 1) { %>
+                        <li><a class="page-link" href="/"><%= i %></a></li>
+                    <% }else { %>
+                        <li><a class="page-link" href="/page/<%= i %>"><%= i %></a></li>
+                    <% } %>
+                <% } %>
+            </li>
+
+            <li class="page-item">
+                <a class="page-link" href="" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
     </div> <!-- end row -->
 </div>

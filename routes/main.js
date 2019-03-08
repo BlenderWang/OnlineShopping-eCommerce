@@ -81,6 +81,10 @@ router.get('/page/:page', (req, res, next) => {
     paginate(req, res, next);
 });
 
+router.get('/products/:page', (req, res, next) => {
+    paginate(req, res, next);
+});
+
 router.get('/about', (req, res) => {
     res.render('main/about');
 });
