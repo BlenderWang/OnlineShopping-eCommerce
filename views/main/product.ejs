@@ -15,10 +15,32 @@
                 <div class="card-body">
                     <h5 class="card-title"><%= product.name %></h5>
                     <p class="card-text"><%= product.price %> <em>kr</em></p>
-                    <p class="card-text d-flex justify-content-between"><em>Betalning: </em><i class="far fa-credit-card"></i></p>
-                    <div class="btn btn-success mb-3">Lägg till i kundvagn</div>
+
+                    <form action="" method="post">
+                        <div class="btn-group" role="group" aria-label="Basic button group">
+                            <input type="hidden" name="quantity" id="quantity" value="1">
+                            <button type="button" id="minus" class="btn btn-light">-</button>
+                            <button type="button" id="total" class="btn btn-light">1</button>
+                            <button type="button" id="plus" class="btn btn-light">+</button>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="hidden" name="product_id" id="product_id" value="<%= product._id %>">
+                            <input type="hidden" name="priceHidden" id="priceHidden" value="<%= product.price %>">
+
+                            <input type="text" name="item" class="form-control" value="<%= product.name %>">
+                            <input type="text" name="priceValue" class="form-control" value="<%= product.price %> kr">
+                        </div>
+
+                        <% if(user) { %>
+                            <button type="submit" class="btn btn-success mb-3">Lägg till i kundvagn</button>
+                        <% } else { %>
+                            <a href="/signup" class="btn btn-danger">Bli Medlem</a>
+                        <% } %>
+                    </form>
+
                     <div class="divi"></div>
-                    <p class="card-text"><small class="text-muted">Senast uppdaterade 3 mins</small></p>
+                    <p class="card-text my-3 d-flex justify-content-between"><em>Betalning: </em><i class="far fa-credit-card"></i></p>
                 </div>
             </div>
         </div>

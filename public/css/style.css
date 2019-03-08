@@ -43,6 +43,11 @@ nav {
   width: 2rem;
 }
 
+.badge {
+  border-radius: 50%;
+  margin-left: -.65rem;
+}
+
 .btn-danger {
   background: var(--brown);
   border-color: var(--brown);

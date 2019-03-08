@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const User = require('../models/user');
+const Cart = require('../models/cart');
+const async = require('async');
 const passport = require('passport');
 const passportConf = require('../config/passport');
 
@@ -29,30 +31,43 @@ router.get('/signup', (req, res, next) => {
 });
 
 router.post('/signup', (req, res, next) => {
-    const user = new User();
+    async.waterfall([
+        (callback) => {
+            const user = new User();
 
-    user.profile.name = req.body.name;
-    user.password = req.body.password;
-    user.email = req.body.email;
-    user.profile.picture = user.gravatar();
+            user.profile.name = req.body.name;
+            user.password = req.body.password;
+            user.email = req.body.email;
+            user.profile.picture = user.gravatar();
 
-    // user email validation
-    User.findOne({ email: req.body.email }, function(err, existingUser) {
-        if(existingUser) {
-            req.flash('errors', 'The account with this email address already exists');
+            // user email validation
+            User.findOne({ email: req.body.email }, function (err, existingUser) {
+                if (existingUser) {
+                    req.flash('errors', 'The account with this email address already exists');
 
-            return res.redirect('/signup');
-        }else {
-            user.save((err, user) => {
+                    return res.redirect('/signup');
+                } else {
+                    user.save((err, user) => {
+                        if (err) return next(err);
+                        callback(null, user)
+                    });
+                }
+            });
+        },
+
+        (user) => {
+            const cart = new Cart();
+            cart.owner = user._id;
+            cart.save((err) => {
                 if(err) return next(err);
-
                 req.logIn(user, function(err) {
                     if(err) return next(err);
                     res.redirect('/profile');
-                })
+                });
             });
         }
-    });
+
+    ]);
 });
 
 router.get('/logout', (req, res, next) => {

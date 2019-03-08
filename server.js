@@ -14,6 +14,8 @@ const secret = require('./config/secret');
 const User = require('./models/user');
 const Category = require('./models/category');
 
+const cartLength = require('./middlewares/middlewares');
+
 const app = express();
 
 /*mongoose.connect('mongodb://root:Abc123@cluster0-shard-00-00-jajab.mongodb.net:27017,cluster0-shard-00-01-jajab.mongodb.net:27017,cluster0-shard-00-02-jajab.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', (err) => {
@@ -52,6 +54,8 @@ app.use((req, res, next) => {
     res.locals.user = req.user;
     next();
 });
+
+app.use(cartLength);
 
 app.use((req, res, next) => {
     Category.find({}, (err, categories) => {
