@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../models/user');
 const Product = require('../models/product');
+const Cart = require('../models/cart');
 
 function paginate(req, res, next) {
     const perPage = 9;
@@ -48,6 +49,19 @@ stream.on('error', function(err) {
   console.log(err);
 });
 
+router.get('/cart', (req, res, next) => {
+    Cart
+        .findOne({ owner: req.user._id })
+        .populate('items.item')
+        .exec((err, foundCart) => {
+            if(err) return next(err);
+            res.render('main/cart', {
+                foundCart: foundCart,
+                message: req.flash('remove')
+            });
+        });
+});
+
 router.post('/product/:product_id', (req, res, next) => {
     Cart.findOne({ owner: req.user._id }, (err, cart) => {
         cart.items.push({
@@ -61,6 +75,18 @@ router.post('/product/:product_id', (req, res, next) => {
         cart.save((err) => {
             if(err) return next(err);
             return res.redirect('/cart');
+        });
+    });
+});
+
+router.post('/remove', (req, res, next) => {
+    Cart.findOne({ owner: req.user._id }, (err, foundCart) => {
+        foundCart.items.pull(String(req.body.item));
+        foundCart.total = (foundCart.total - parseFloat(req.body.price)).toFixed(2);
+        foundCart.save((err, found) => {
+            if(err) return next(err);
+            req.flash('remove', 'Successfully removed item');
+            res.redirect('/cart');
         });
     });
 });

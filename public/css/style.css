@@ -44,7 +44,7 @@ nav {
 }
 
 .badge {
-  border-radius: 50%;
+  border-radius: 2rem;
   margin-left: -.65rem;
 }
 
@@ -185,4 +185,9 @@ img.card-img-top {
 .fa-credit-card {
   font-size: 1.8rem;
   color: var(--black);
+}
+
+/* shopping cart */
+.product-image {
+  width: 100%;
 }
