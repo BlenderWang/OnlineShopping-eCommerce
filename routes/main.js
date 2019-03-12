@@ -3,6 +3,10 @@ const User = require('../models/user');
 const Product = require('../models/product');
 const Cart = require('../models/cart');
 
+const async = require('async');
+
+const stripe = require('stripe')('sk_test_sNn8CrFTtnKxUsIGJqP8U3U8');
+
 function paginate(req, res, next) {
     const perPage = 9;
     const page = req.params.page;
@@ -151,6 +155,55 @@ router.get('/product/:id', (req, res, next) => {
             product: product
         });
     });
+});
+
+router.post('/payment', (req, res, next) => {
+    const stripeToken = req.body.stripeToken;
+    const currentCharges = Math.round(req.body.stripeMoney * 100);
+
+    stripe.customers.create({
+        source: stripeToken,
+    }).then((customer) => {
+        return stripe.charges.create({
+            amount: currentCharges,
+            currency: 'sek',
+            customer: customer.id
+        });
+    });
+    // then((charge) => {
+    //     async.waterfall([
+    //         function(callback) {
+    //             Cart.findOne({ owner: req.user._id }, (err, cart) => {
+    //                 callback(err, cart);
+    //             });
+    //         },
+    //         function(cart, callback) {
+    //             User.findOne({ _id: req.user._id}, (err, user) => {
+    //                 if(user) {
+    //                     for(let i = 0; i < cart.length; i++) {
+    //                         user.history.push({
+    //                             item: cart.items[i].item,
+    //                             paid: cart.items[i].price
+    //                         });
+    //                     }
+    //                     user.save((err, user) => {
+    //                         if(err) return nwxt(err);
+    //                         callback(err, user);
+    //                     });
+    //                 }
+    //             });
+    //         },
+    //         function(user) {
+    //             Cart.update({ owner: user._id }, { $set: { items: [], total: 0 }}, (err, update) => {
+    //                 if(update) {
+    //                     res.redirect('/profile');
+    //                 }
+    //             });
+    //         }
+    //     ]);
+    // });
+    res.redirect('/profile');
+
 });
 
 module.exports = router;
