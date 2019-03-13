@@ -165,11 +165,18 @@ router.get('/product/:id', (req, res, next) => {
     });
 });
 
-router.post('/payment', function(req, res) {
+router.post('/payment', async function(req, res) {
     var token = req.body.stripeToken;
+    console.log("user id: " + req.user._id) //for testing purpose
+
+    var query = await Cart.findOne({ owner: req.user._id }, (err, cart) => {
+        return cart.total;
+    });
+    var amountTotal = query.total;
+    console.log("total to be charged: " + amountTotal);
 
     var charge = stripe.charges.create({
-      amount: 1700, // random amount for testing
+      amount: amountTotal * 100, // random amount for testing * 100
       currency: 'sek',
       description: 'description',
       source: token,
@@ -177,7 +184,13 @@ router.post('/payment', function(req, res) {
         if (err) {
             console.warn(err)
         } else {
-            // res.status(200).send(charge)
+            Cart.findOne({ owner: req.user._id }, (err, cart) => {
+                cart.items =  []
+                cart.total = 0
+                cart.save((err) => {
+                    console.error("problem clearing: " + err);
+                });
+            });
             res.redirect('/profile')
         }
     })
