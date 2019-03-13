@@ -10,7 +10,7 @@
 
             <li class="nav-item active">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Köp<span class="sr-only">(current)</span></a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu pl-5">
                     <% for(let i = 0; i < categories.length; i++) { %>
                         <li><a href="/products/<%= categories[i]._id %>"><%= categories[i].name %></a></li>
                     <% } %>
