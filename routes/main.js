@@ -1,4 +1,12 @@
+var express = require('express')
+var bodyParser = require('body-parser')
+
+var path = require('path')
+
 const router = require('express').Router();
+router.use(bodyParser.urlencoded({ extended: true }))
+const fs = require('fs');
+
 const User = require('../models/user');
 const Product = require('../models/product');
 const Cart = require('../models/cart');
@@ -17,9 +25,9 @@ function paginate(req, res, next) {
         .limit(perPage)
         .populate('category')
         .exec((err, products) => {
-            if(err) return next(err);
+            if (err) return next(err);
             Product.count().exec((err, count) => {
-                if(err) return next(err);
+                if (err) return next(err);
                 res.render('main/product-main', {
                     products: products,
                     pages: count / perPage
@@ -28,11 +36,11 @@ function paginate(req, res, next) {
         });
 }
 
-Product.createMapping(function(err, mapping) {
-    if(err) {
+Product.createMapping(function (err, mapping) {
+    if (err) {
         console.log('error occurred creating mapping');
         console.log(err);
-    }else {
+    } else {
         console.log('mapping created');
         console.log(mapping);
     }
@@ -41,16 +49,16 @@ Product.createMapping(function(err, mapping) {
 const stream = Product.synchronize();
 let count = 0;
 
-stream.on('data', function() {
-  count++;
+stream.on('data', function () {
+    count++;
 });
 
-stream.on('close', function() {
-  console.log("Indexed " + count + " documents");
+stream.on('close', function () {
+    console.log("Indexed " + count + " documents");
 });
 
-stream.on('error', function(err) {
-  console.log(err);
+stream.on('error', function (err) {
+    console.log(err);
 });
 
 router.get('/cart', (req, res, next) => {
@@ -58,7 +66,7 @@ router.get('/cart', (req, res, next) => {
         .findOne({ owner: req.user._id })
         .populate('items.item')
         .exec((err, foundCart) => {
-            if(err) return next(err);
+            if (err) return next(err);
             res.render('main/cart', {
                 foundCart: foundCart,
                 message: req.flash('remove')
@@ -77,7 +85,7 @@ router.post('/product/:product_id', (req, res, next) => {
         cart.total = (cart.total + parseFloat(req.body.priceValue)).toFixed(2);
 
         cart.save((err) => {
-            if(err) return next(err);
+            if (err) return next(err);
             return res.redirect('/cart');
         });
     });
@@ -88,7 +96,7 @@ router.post('/remove', (req, res, next) => {
         foundCart.items.pull(String(req.body.item));
         foundCart.total = (foundCart.total - parseFloat(req.body.price)).toFixed(2);
         foundCart.save((err, found) => {
-            if(err) return next(err);
+            if (err) return next(err);
             req.flash('remove', 'Successfully removed item');
             res.redirect('/cart');
         });
@@ -100,11 +108,11 @@ router.post('/search', (req, res, next) => {
 });
 
 router.get('/search', (req, res, next) => {
-    if(req.query.q) {
+    if (req.query.q) {
         Product.search({
             query_string: { query: req.query.q }
         }, (err, results) => {
-            if(err) return next(err);
+            if (err) return next(err);
             const data = results.hits.hits.map((hit) => {
                 return hit;
             });
@@ -117,9 +125,9 @@ router.get('/search', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
-    if(req.user) {
+    if (req.user) {
         paginate(req, res, next);
-    }else {
+    } else {
         res.render('main/home');
     }
 });
@@ -140,8 +148,8 @@ router.get('/products/:id', (req, res, next) => {
     Product
         .find({ category: req.params.id })
         .populate('category')
-        .exec(function(err, products) {
-            if(err) return next(err);
+        .exec(function (err, products) {
+            if (err) return next(err);
             res.render('main/category', {
                 products: products
             });
@@ -150,60 +158,29 @@ router.get('/products/:id', (req, res, next) => {
 
 router.get('/product/:id', (req, res, next) => {
     Product.findById({ _id: req.params.id }, (err, product) => {
-        if(err) return next(err);
+        if (err) return next(err);
         res.render('main/product', {
             product: product
         });
     });
 });
 
-router.post('/payment', (req, res, next) => {
-    const stripeToken = req.body.stripeToken;
-    const currentCharges = Math.round(req.body.stripeMoney * 100);
+router.post('/payment', function(req, res) {
+    var token = req.body.stripeToken;
 
-    stripe.customers.create({
-        source: stripeToken,
-    }).then((customer) => {
-        return stripe.charges.create({
-            amount: currentCharges,
-            currency: 'sek',
-            customer: customer.id
-        });
-    });
-    // then((charge) => {
-    //     async.waterfall([
-    //         function(callback) {
-    //             Cart.findOne({ owner: req.user._id }, (err, cart) => {
-    //                 callback(err, cart);
-    //             });
-    //         },
-    //         function(cart, callback) {
-    //             User.findOne({ _id: req.user._id}, (err, user) => {
-    //                 if(user) {
-    //                     for(let i = 0; i < cart.length; i++) {
-    //                         user.history.push({
-    //                             item: cart.items[i].item,
-    //                             paid: cart.items[i].price
-    //                         });
-    //                     }
-    //                     user.save((err, user) => {
-    //                         if(err) return nwxt(err);
-    //                         callback(err, user);
-    //                     });
-    //                 }
-    //             });
-    //         },
-    //         function(user) {
-    //             Cart.update({ owner: user._id }, { $set: { items: [], total: 0 }}, (err, update) => {
-    //                 if(update) {
-    //                     res.redirect('/profile');
-    //                 }
-    //             });
-    //         }
-    //     ]);
-    // });
-    res.redirect('/profile');
-
-});
+    var charge = stripe.charges.create({
+      amount: 1700, // random amount for testing
+      currency: 'sek',
+      description: 'description',
+      source: token,
+    }, function(err, charge) {
+        if (err) {
+            console.warn(err)
+        } else {
+            // res.status(200).send(charge)
+            res.redirect('/profile')
+        }
+    })
+})
 
 module.exports = router;
