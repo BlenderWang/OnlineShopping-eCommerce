@@ -9,9 +9,11 @@ let ProductSchema = new Schema({
     image: String
 });
 
+// mongoosastic the library used to replicate data from mongodb to elasticsearch
+//  helps reducing additional code for connecting to db
 ProductSchema.plugin(mongoosastic, {
     hosts: [
-      'localhost:9200'
+      'localhost:9200'  // default for mogosastic
     ]
 });
 

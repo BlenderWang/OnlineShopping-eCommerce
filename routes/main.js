@@ -36,6 +36,7 @@ function paginate(req, res, next) {
         });
 }
 
+// to create a map between product db to elasticsearch replica set
 Product.createMapping(function (err, mapping) {
     if (err) {
         console.log('error occurred creating mapping');
@@ -46,17 +47,21 @@ Product.createMapping(function (err, mapping) {
     }
 });
 
-const stream = Product.synchronize();
+const stream = Product.synchronize();   //sync all the docs in the replica set
 let count = 0;
 
+// run 3 even driven methods:
+// first to count all the docs
 stream.on('data', function () {
     count++;
 });
 
+// second when close the search it'll log all the indexes of docs in the set
 stream.on('close', function () {
     console.log("Indexed " + count + " documents");
 });
 
+// last print out all errors
 stream.on('error', function (err) {
     console.log(err);
 });
@@ -103,6 +108,7 @@ router.post('/remove', (req, res, next) => {
     });
 });
 
+// 2 routes for search fns
 router.post('/search', (req, res, next) => {
     res.redirect('/search?q=' + req.body.q);
 });

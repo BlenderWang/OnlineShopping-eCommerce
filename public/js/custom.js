@@ -1,5 +1,5 @@
 $(function() {
-
+    // instant search fn
     $('#search').keyup(function() {
         var search_term = $(this).val();
 
@@ -42,6 +42,7 @@ $(function() {
         });
     });
 
+    // the 'plus' fn on single product page
     $(document).on('click', '#plus', function(e) {
         e.preventDefault();
         var priceValue = parseFloat($('#priceValue').val());
@@ -55,6 +56,7 @@ $(function() {
         $('#total').html(quantity);
     });
 
+    // 'minus' works similarly as 'plus' though it won't go below 1
     $(document).on('click', '#minus', function(e) {
         e.preventDefault();
         var priceValue = parseFloat($('#priceValue').val());

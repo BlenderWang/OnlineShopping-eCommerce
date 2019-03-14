@@ -47,6 +47,7 @@ router.post('/signup', (req, res, next) => {
 
                     return res.redirect('/signup');
                 } else {
+                    // if user is found go to user callback
                     user.save((err, user) => {
                         if (err) return next(err);
                         callback(null, user)
@@ -87,7 +88,7 @@ router.post('/edit-profile', (req, res, next) => {
 
         user.save(function(err) {
             if(err) return next(err);
-            req.flash('success', 'Successully edit profile');
+            req.flash('success', 'Successully modified your profile');
             return res.redirect('/edit-profile');
         });
     });
