@@ -1,0 +1,88 @@
+﻿Begnatsomnytt
+
+
+kravspecifikation 
+
+
+Skapad 25/2/2019
+Företag: Webbshop som säljer och köper jackor/vintage kläder.
+1. 
+1.1
+Krav Icke funktionella
+
+
+Tillgänglighet:
+Se till så att webbsidan är tillgänglig för alla.
+   * Funktionshindrade - läsverktyg, lättläst, färgkontraster, WCAG 2.0
+   * Se till så att webbplatsen följer webbriktlinjer
+
+
+Användbarhet:
+Se till så att webbsidan är användbar för alla.
+   * Responsiv - Är anpassad för alla enheter (mobil,tablet, olika skärmstorlekar)
+   * Konsekvent
+   * Kontrast
+   * Luftig
+   * Lättnavigerad
+   * Överskådlig
+   * Lätt att fylla i formulär
+   * använda javascript för att försköna köp funktionen
+
+
+Flöden
+
+
+Vill köpa:
+   1. Köpare söker efter ett klädesplagg
+   2. Köpare lägger plagg i kundvagn
+   3. Köpare köper plagg
+   4. Köpare får notis när plagget är skickat
+
+
+
+
+Vill sälja:
+   1. Användare lägger upp plagg till försäljning
+   2. Användare får notis om att kund vill köpa plagg
+   3. Användare skickar plagg på posten och trycker på “skickat”
+   4. Köpare får notis om att plagg är skickat
+Sökmotoroptimering (SEO)
+Sökmotoroptimering går hand i hand med användbarhet och tillgänglighet. Se till så att man använder rubriker på rätt sätt, använda html5 element på rätt sätt (article, section, header, footer, nav), använda alt texter på bilder etc.
+
+
+Syfte
+Syfte med webbplatsen är att nå ut till framförallt unga personer.
+Syftet med själva affärsidén är att både kund, säljare, företag och miljö vinner på detta. Kund genom att få billigare kläder, säljaren genom att få pengar tillbaka på inte längre för den åtråvärt material, miljön genom återanvändning och företaget (antingen genom att ta procent på köpet, att det kostar att lägga upp annons, frakten…?). 
+
+
+Mål
+Mätbara mål: 
+   * hur många plagg som säljs
+   * hur många besökare som kommer till webbplatsen
+   * hur många besökare som faktiskt gör ett köp
+   * hur många användare som säljer diverse plagg
+   * vinst på sålda kläder.
+
+
+
+
+Innehåll
+   * Klädes annonser
+   * Sökfunktion och lista med annonser
+   * Beskrivning av företaget
+   * Mina sidor
+   * Kontaktuppgifter
+
+
+Struktur
+Header: logotyp, navigering (köpa plagg, sälja plagg, om oss, kontakt, mina sidor), kundvagn
+Startsida: Rubrik, fokus på sök, kort beskrivning av företag och hur sidan fungerar.
+Annonssida: Lista på plagg, filtrering genom kategorier.
+Klädes annonssida: om den är slutsåld för tillfället, CTA knapp KÖP.
+Mina sidor: Mina köp, mina inställningar.
+Footer: Kontaktuppgifter, snabblänkar, social media.
+
+
+Design
+Typsnitt: På webbplatsen så använder vi ett typsnitt som är tydligt och lättläst. Olika stilar av samma typsnitt (regular, light, bold, medium). Till brödtext: Open sans. Till rubriker: ?
+Färger: Jordfärger (grön, brun, beige, vit).
