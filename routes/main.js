@@ -181,25 +181,44 @@ router.post('/payment', async function(req, res) {
     var amountTotal = query.total;
     console.log("total to be charged: " + amountTotal);
 
-    var charge = stripe.charges.create({
+    stripe.charges.create({
       amount: amountTotal * 100, // random amount for testing * 100
       currency: 'sek',
       description: 'description',
       source: token,
-    }, function(err, charge) {
-        if (err) {
-            console.warn(err)
-        } else {
-            Cart.findOne({ owner: req.user._id }, (err, cart) => {
-                cart.items =  []
-                cart.total = 0
-                cart.save((err) => {
-                    console.error("problem clearing: " + err);
+    }).then((charge) => {
+        async.waterfall([
+            function(callback) {
+                Cart.findOne({ owner: req.user._id }, (err, cart) => {
+                    callback(err, cart);
                 });
-            });
-            res.redirect('/profile')
-        }
+            },
+            function(cart, callback) {
+                User.findOne({ _id: req.user._id }, (err, user) => {
+                    if(user) {
+                        for(let i = 0; i < cart.items.length; i++) {
+                            user.history.push({
+                                item: cart.items[i].item,
+                                paid: cart.items[i].price
+                            });
+                        }
+
+                        user.save((err, user) => {
+                            if(err) return next(err);
+                            callback(err, user);
+                        });
+                    }
+                });
+            },
+            function(user) {
+                Cart.update({ owner: user._id }, { $set: { items: [], total: 0 }}, function(err, update) {
+                    if(update) {
+                        res.redirect('/profile');
+                    }
+                });
+            }
+        ]);
     })
-})
+});
 
 module.exports = router;

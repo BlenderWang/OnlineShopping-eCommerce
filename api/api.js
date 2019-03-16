@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const async = require('async');
-const faker = require('faker');
+const faker = require('faker/locale/sv');
 const Category = require('../models/category');
 const Product = require('../models/product');
 
