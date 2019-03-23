@@ -36,7 +36,7 @@ function paginate(req, res, next) {
         });
 }
 
-// to create a map between product db to elasticsearch replica set
+// to create a map between product & to elasticsearch replica set
 Product.createMapping(function (err, mapping) {
     if (err) {
         console.log('error occurred creating mapping');
@@ -172,20 +172,21 @@ router.get('/product/:id', (req, res, next) => {
 });
 
 router.post('/payment', async function(req, res) {
-    var token = req.body.stripeToken;
+    const token = req.body.stripeToken;
     console.log("user id: " + req.user._id) //for testing purpose
 
-    var query = await Cart.findOne({ owner: req.user._id }, (err, cart) => {
+    let query = await Cart.findOne({ owner: req.user._id }, (err, cart) => {
         return cart.total;
     });
-    var amountTotal = query.total;
-    console.log("total to be charged: " + amountTotal);
 
+    let amountTotal = query.total;
+    console.log("total to be charged: " + amountTotal);
     stripe.charges.create({
-      amount: amountTotal * 100, // random amount for testing * 100
-      currency: 'sek',
-      description: 'description',
-      source: token,
+
+        amount: amountTotal * 100, // random amount for testing * 100
+        currency: 'sek',
+        description: 'description',
+        source: token,
     }).then((charge) => {
         async.waterfall([
             function(callback) {
