@@ -22,7 +22,7 @@
     "express-session": "^1.15.6",
     "faker": "^4.1.0",
     "mongoosastic": "^4.4.1",
-    "mongoose": "^5.4.16",
+    "mongoose": "^8.8.3",
     "morgan": "^1.9.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
